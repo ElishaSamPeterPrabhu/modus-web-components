@@ -80,7 +80,11 @@ Default.args = {
     username: 'Modus User',
   },
   buttons: [
-    { id: 'addMenu', icon: 'add' },
+    { id: 'addMenu', icon: 'add',
+      tooltip: {
+        text: 'Add',
+      }
+    },
     { id: 'notificationMenu', icon: 'notifications' },
   ],
   showSearch: false,

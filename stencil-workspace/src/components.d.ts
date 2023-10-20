@@ -1334,7 +1334,7 @@ export namespace Components {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position": 'bottom' | 'left' | 'right' | 'top';
+        "position": ToolTipPlacement;
         /**
           * The tooltip's text.
          */
@@ -3401,7 +3401,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position"?: 'bottom' | 'left' | 'right' | 'top';
+        "position"?: ToolTipPlacement;
         /**
           * The tooltip's text.
          */
