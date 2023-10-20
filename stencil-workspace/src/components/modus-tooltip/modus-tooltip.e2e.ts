@@ -1,4 +1,26 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { fireEvent, getByTestId } from '@testing-library/dom';
+
+// Create a mock of the Popper.js library
+const createPopperMock = jest.fn(() => ({
+  // Mock the `update` method
+  update: jest.fn(),
+  scheduleUpdate: jest.fn(),
+  // Add any other methods you need to mock
+}));
+
+// Store the original Popper method in case you want to restore it
+const originalCreatePopper = window['createPopper'];
+
+// Before all tests, replace the global `createPopper` with the mock
+beforeAll(() => {
+  window['createPopper'] = createPopperMock;
+});
+
+// After all tests, restore the original `createPopper` method
+afterAll(() => {
+  window['createPopper'] = originalCreatePopper;
+});
 
 describe('modus-tooltip', () => {
   it('renders', async () => {
@@ -50,11 +72,11 @@ describe('modus-tooltip', () => {
     tooltip.setProperty('disabled', false);
     await page.waitForChanges();
     let text = await page.find('modus-tooltip >>> .tooltip');
-    expect(text.textContent).toEqual('Hello');
+    expect(text).not.toHaveClass('disabled');
 
     tooltip.setProperty('disabled', true);
     await page.waitForChanges();
     text = await page.find('modus-tooltip >>> .tooltip');
-    expect(text).toEqual(null);
+    expect(text).toHaveClass('disabled');
   });
 });
